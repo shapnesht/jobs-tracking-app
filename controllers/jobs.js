@@ -149,13 +149,11 @@ const showStats = async (req, res) => {
 }
 
 const getAllListedJob = async (req, res) => {
-  const { search } = req.params
-
+  const { search } = req.query
   let url = `https://api.cuvette.tech/api/v1/externaljobs`
   if (search) {
     url = url + `?search=${search}`
   }
-
   const jobs = await axios.get(url)
 
   res.status(StatusCodes.OK).json(jobs.data)
