@@ -11,8 +11,11 @@ const listedJobsSlice = createSlice({
   name: 'listedJobs',
   initialState: { jobs: [], searchTerm: '', isLoading: false },
   reducers: {
-    handleChange: (state, { payload: { name, value } }) => {
-      state[name] = value
+    handleChange: (state, { payload: { value } }) => {
+      state.searchTerm = value
+    },
+    clearSearch: (state) => {
+      state.searchTerm = ''
     },
   },
   extraReducers: {
@@ -20,9 +23,8 @@ const listedJobsSlice = createSlice({
       state.isLoading = true
     },
     [getAllListedJobs.fulfilled]: (state, { payload }) => {
-      // console.log(payload)
       state.isLoading = false
-      state.jobs = payload.jobs
+      state.jobs = payload.data
     },
     [getAllListedJobs.rejected]: (state, { payload }) => {
       state.isLoading = false
@@ -32,4 +34,4 @@ const listedJobsSlice = createSlice({
 })
 
 export default listedJobsSlice.reducer
-export const { searchJob, handleChange } = listedJobsSlice.actions
+export const { handleChange, clearSearch } = listedJobsSlice.actions

@@ -17,6 +17,7 @@ const ListedJob = ({
   skills,
   title,
 }) => {
+  
   return (
     <Wrapper>
       <header>

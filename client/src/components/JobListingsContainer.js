@@ -13,7 +13,7 @@ const JobListingsContainer = () => {
 
   useEffect(() => {
     dispatch(getAllListedJobs())
-  }, [searchTerm, dispatch])
+  }, [])
 
   if (isLoading) {
     return <Loading />
@@ -30,7 +30,7 @@ const JobListingsContainer = () => {
   return (
     <Wrapper>
       <div className="jobs">
-        {jobs?.data?.map((job) => {
+        {jobs?.map((job) => {
           return <ListedJob {...job} key={job?._id} />
         })}
       </div>
