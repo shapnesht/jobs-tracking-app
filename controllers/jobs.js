@@ -3,6 +3,7 @@ const { StatusCodes } = require('http-status-codes')
 const { BadRequestError, NotFoundError } = require('../errors')
 const moment = require('moment')
 const mongoose = require('mongoose')
+const axios = require('axios')
 
 const getAllJobs = async (req, res) => {
   const { search, jobType, status, sort } = req.query
@@ -149,11 +150,15 @@ const showStats = async (req, res) => {
 
 const getAllListedJob = async (req, res) => {
   const { search } = req.params
-  const jobs = await fetch(
-    `https://api.cuvette.tech/api/v1/externaljobs?search=${search}`
-  )
-  const data = await jobs.json()
-  res.status(StatusCodes.OK).json(data)
+
+  let url = `https://api.cuvette.tech/api/v1/externaljobs`
+  if (search) {
+    url = url + `?search=${search}`
+  }
+
+  const jobs = await axios.get(url)
+
+  res.status(StatusCodes.OK).json(jobs.data)
 }
 
 module.exports = {
@@ -163,5 +168,5 @@ module.exports = {
   updateJob,
   getJob,
   showStats,
-  getAllListedJob
+  getAllListedJob,
 }

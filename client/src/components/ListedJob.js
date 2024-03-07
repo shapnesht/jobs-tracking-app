@@ -17,13 +17,16 @@ const ListedJob = ({
   skills,
   title,
 }) => {
-  
   return (
     <Wrapper>
       <header>
-        <div className="company-icon">
-          <img src={imageUrl} alt="" className="logo" />
-        </div>
+        {imageUrl ? (
+          <div className="company-icon">
+            <img src={imageUrl} alt="" className="company-logo" />
+          </div>
+        ) : (
+          <div className="main-icon">{companyName.charAt(0)}</div>
+        )}
         <div className="info">
           <h5>{title}</h5>
           <p>{companyName}</p>
