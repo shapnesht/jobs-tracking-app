@@ -324,3 +324,20 @@ ul {
 .Toastify__toast {
   text-transform: capitalize;
 }
+
+.company-icon {
+  width: 60px;
+  margin-right: 10px;
+}
+
+.logo {
+  width: 100%;
+}
+
+.flex {
+  display: flex;
+}
+
+.space-between {
+  justify-content: space-between;
+}
